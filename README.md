@@ -19,7 +19,11 @@ Or install it yourself as:
     $ gem install unhookd
 
 ## Usage
+Unhookd can be configured and used in a Ruby Script for one off deploys.
+
 ```
+require 'unhookd'
+
 # Configure unhookd
 Unhookd.configure do |config|
   config.unhookd_url = "your-url-to-your-unhookd-installation"
@@ -29,6 +33,18 @@ end
 
 # Call deploy with the correct args!
 Unhookd.deploy!("your-branch", "your-sha", { "some_value" => "you'd like to set on your chart" })
+```
+
+Even better, pair this with a job in Circle Ci to enable continuous deploys to your Kubernetes cluster!
+
+## Slack Notification
+Unhookd also optionally supports notifying a Slack channel using the incoming webhooks feature of Slack. Configure your webhook url and set it and an optional message:
+
+```
+Unhookd.configure do |config|
+  config.slack_webhook_url = "your-slack-webhook-url"
+  config.slack_webhook_message = "Deployed with Unhookd!"
+end
 ```
 
 ## Development
