@@ -16,6 +16,7 @@ module Unhookd
       )
 
       notify_slack unless @config.slack_webhook_url.nil?
+      post_deploy_message
     end
 
     private
@@ -53,6 +54,11 @@ module Unhookd
           }
         ]
       }.to_json
+    end
+
+    def post_deploy_message
+      puts "Success! Sent a request to Unhookd with the following values:"
+      puts @final_values.inspect
     end
   end
 end
