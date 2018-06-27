@@ -1,8 +1,6 @@
-# Unhookd
+# unhookd-gem
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/unhookd`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem allows you to send a request to the Unhookd service in a Kubernetes cluster to deploy a rails application with a given sha and chart
 
 ## Installation
 
@@ -21,8 +19,17 @@ Or install it yourself as:
     $ gem install unhookd
 
 ## Usage
+```
+# Configure unhookd
+Unhookd.configure do |config|
+  config.unhookd_url = "your-url-to-your-unhookd-installation"
+  config.chart_name = "your-chart-repo/your-chart-name"
+  config.repo_name = "your-git-repository"
+end
 
-TODO: Write usage instructions here
+# Call deploy with the correct args!
+Unhookd.deploy!("your-branch", "your-sha", { "some_value" => "you'd like to set on your chart" })
+```
 
 ## Development
 
