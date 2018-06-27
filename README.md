@@ -32,7 +32,7 @@ Unhookd.configure do |config|
 end
 
 # Call deploy with the correct args!
-Unhookd.deploy!("your-branch", "your-sha", { "some_value" => "you'd like to set on your chart" })
+Unhookd.deploy!("your-sha", "your-branch", { "some_value" => "you'd like to set on your chart" })
 ```
 
 Even better, pair this with a job in Circle Ci to enable continuous deploys to your Kubernetes cluster!
