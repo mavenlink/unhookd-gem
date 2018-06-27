@@ -1,9 +1,9 @@
 module Unhookd
   class Deployer
-    def initialize(sha, branch)
+    def initialize(sha, branch, chart_values)
       @branch = branch
       @sha = sha
-      @final_values = {}
+      @final_values = { "values" => chart_values }
       @config = Unhookd.configuration
     end
 

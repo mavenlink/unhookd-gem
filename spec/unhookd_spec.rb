@@ -42,13 +42,14 @@ RSpec.describe Unhookd do
   describe ".deploy!" do
     let(:sha) { '123' }
     let(:branch) { 'my-branch' }
-    let(:deployer_stub) { Unhookd::Deployer.new(sha, branch) }
+    let(:chart_values) { { foo: 'bar' }}
+    let(:deployer_stub) { Unhookd::Deployer.new(sha, branch, chart_values) }
 
     it "initializes an Unhookd::Deployer with passed args and calls #deploy! on it" do
-      expect(Unhookd::Deployer).to receive(:new).with(sha, branch).and_return(deployer_stub)
+      expect(Unhookd::Deployer).to receive(:new).with(sha, branch, chart_values).and_return(deployer_stub)
       expect(deployer_stub).to receive(:deploy!)
 
-      Unhookd.deploy!(sha, branch)
+      Unhookd.deploy!(sha, branch, chart_values)
     end
   end
 end
