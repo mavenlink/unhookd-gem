@@ -14,6 +14,8 @@ module Unhookd
         headers: { "Content-Type" => "application/json" },
         verify: false,
       )
+
+      notify_slack unless @config.slack_webhook_url.nil?
     end
 
     private
@@ -27,6 +29,30 @@ module Unhookd
           "chart" => @config.chart_name,
         }
       )
+    end
+
+    def notify_slack
+      HTTParty.post(
+        @config.slack_webhook_url,
+        body: slack_webhook_body,
+        headers: { "Content-Type" => "application/json" },
+        verify: false,
+      )
+    end
+
+    def slack_webhook_body
+      {
+        "attachments" => [
+          {
+            "fallback" => "Your branch was deployed!",
+            "color" => "#36a64f",
+            "pretext" => "The '#{@branch}' branch was deployed!",
+            "author_name" => "Unhookd",
+            "text" => @config.slack_webhook_message,
+            "ts" => Time.now.to_i
+          }
+        ]
+      }.to_json
     end
   end
 end
