@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jason@mavenlink.com"]
 
   spec.summary       = "Automate deploys to your Kuberetes Cluster using Unhookd"
-  spec.homepage      = "www.github.com/mavenlink/unhookd-gem"
+  spec.homepage      = "https://www.github.com/mavenlink/unhookd-gem"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
