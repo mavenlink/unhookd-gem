@@ -44,7 +44,7 @@ RSpec.describe Unhookd do
     let(:branch) { 'my-branch' }
     let(:deployer_stub) { Unhookd::Deployer.new(sha, branch) }
 
-    it "initialize an Unhookd::Deployer with passed args and calls deploy on it" do
+    it "initializes an Unhookd::Deployer with passed args and calls #deploy! on it" do
       expect(Unhookd::Deployer).to receive(:new).with(sha, branch).and_return(deployer_stub)
       expect(deployer_stub).to receive(:deploy!)
 
