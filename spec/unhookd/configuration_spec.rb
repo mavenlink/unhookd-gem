@@ -25,6 +25,12 @@ RSpec.describe Unhookd::Configuration do
         expect(Unhookd::Configuration.new.slack_webhook_url).to eq(nil)
       end
     end
+
+    describe "#slack_webhook_message" do
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.slack_webhook_message).to eq(nil)
+      end
+    end
   end
 
   describe "setters" do
@@ -57,6 +63,14 @@ RSpec.describe Unhookd::Configuration do
         config = Unhookd::Configuration.new
         config.slack_webhook_url = "http://some-slack-webhook-url.com"
         expect(config.slack_webhook_url).to eq("http://some-slack-webhook-url.com")
+      end
+    end
+
+    describe "#slack_webhook_message=" do
+      it "can set a value" do
+        config = Unhookd::Configuration.new
+        config.slack_webhook_message = "I deployed your branch!"
+        expect(config.slack_webhook_message).to eq("I deployed your branch!")
       end
     end
   end
