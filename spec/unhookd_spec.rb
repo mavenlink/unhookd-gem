@@ -38,4 +38,11 @@ RSpec.describe Unhookd do
       expect(config.unhookd_url).to eq(Unhookd::Configuration.new.unhookd_url)
     end
   end
+
+  describe ".deploy!" do
+    it "initialize a Unhookd::Deployer and calls deploy on it" do
+      expect_any_instance_of(Unhookd::Deployer).to receive(:deploy!)
+      Unhookd.deploy!
+    end
+  end
 end
