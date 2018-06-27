@@ -19,7 +19,7 @@ module Unhookd
     yield(configuration)
   end
 
-  def self.deploy!
-    Unhookd::Deployer.new.deploy!
+  def self.deploy!(sha, branch)
+    Unhookd::Deployer.new(sha, branch).deploy!
   end
 end
