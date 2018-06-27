@@ -19,6 +19,12 @@ RSpec.describe Unhookd::Configuration do
         expect(Unhookd::Configuration.new.repo_name).to eq("repo_name")
       end
     end
+
+    describe "#slack_webhook_url" do
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.slack_webhook_url).to eq(nil)
+      end
+    end
   end
 
   describe "setters" do
@@ -43,6 +49,14 @@ RSpec.describe Unhookd::Configuration do
         config = Unhookd::Configuration.new
         config.repo_name = "some_repo"
         expect(config.repo_name).to eq("some_repo")
+      end
+    end
+
+    describe "#slack_webhook_url=" do
+      it "can set a value" do
+        config = Unhookd::Configuration.new
+        config.slack_webhook_url = "http://some-slack-webhook-url.com"
+        expect(config.slack_webhook_url).to eq("http://some-slack-webhook-url.com")
       end
     end
   end
