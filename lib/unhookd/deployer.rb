@@ -1,3 +1,5 @@
+require 'httparty'
+
 module Unhookd
   class Deployer
     def initialize(sha, branch, chart_values)
