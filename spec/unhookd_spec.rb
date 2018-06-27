@@ -5,7 +5,7 @@ RSpec.describe Unhookd do
     expect(Unhookd::VERSION).not_to be nil
   end
 
-  describe "#configure" do
+  describe ".configure" do
     before do
       Unhookd.configure do |config|
         config.unhookd_url = 'www.some-url-in-a-cluster.com'
