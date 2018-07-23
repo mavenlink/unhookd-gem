@@ -31,6 +31,12 @@ RSpec.describe Unhookd::Configuration do
         expect(Unhookd::Configuration.new.slack_webhook_message).to eq(nil)
       end
     end
+
+    describe "#values_file_path" do
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.values_file_path).to eq(nil)
+      end
+    end
   end
 
   describe "setters" do
@@ -71,6 +77,14 @@ RSpec.describe Unhookd::Configuration do
         config = Unhookd::Configuration.new
         config.slack_webhook_message = "I deployed your branch!"
         expect(config.slack_webhook_message).to eq("I deployed your branch!")
+      end
+    end
+
+    describe "#values_file_path=" do
+      it "can set a value" do
+        config = Unhookd::Configuration.new
+        config.values_file_path = "foo/bar/path.yaml"
+        expect(config.values_file_path).to eq("foo/bar/path.yaml")
       end
     end
   end
