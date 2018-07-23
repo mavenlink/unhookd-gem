@@ -18,7 +18,7 @@ RSpec.describe Unhookd::Deployer do
     let(:expected_unhookd_headers) { { "Content-Type" => "application/json" } }
 
     subject { described_class.new(sha, branch, chart_values) }
-    
+
     it "sends a request to the configured endpoint with the correct values" do
       expect(HTTParty)
         .to receive(:post)
