@@ -17,7 +17,7 @@ module Unhookd
         verify: false,
       )
 
-      Unhookd::Notifiers::Slack.notify!(@branch) unless @config.slack_webhook_url.nil?
+      Unhookd::Notifiers::Slack.notify! unless @config.slack_webhook_url.nil?
       post_deploy_message
     end
 

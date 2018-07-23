@@ -55,7 +55,7 @@ RSpec.describe Unhookd::Deployer do
         end
 
         it "tells the Slack Notifier to send a notification" do
-          allow(Unhookd::Notifiers::Slack).to receive(:notify!).with(branch)
+          allow(Unhookd::Notifiers::Slack).to receive(:notify!)
 
           subject.deploy!
         end

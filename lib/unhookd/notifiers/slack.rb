@@ -1,7 +1,7 @@
 module Unhookd
   module Notifiers
     class Slack
-      def self.notify!(branch)
+      def self.notify!
         @config = Unhookd.configuration
 
         slack_webhook_body = {
@@ -9,7 +9,7 @@ module Unhookd
             {
               "fallback" => "Your branch was deployed!",
               "color" => "#36a64f",
-              "pretext" => "The '#{branch}' branch was deployed!",
+              "pretext" => "Something was deployed!",
               "author_name" => "Unhookd",
               "text" => @config.slack_webhook_message,
               "ts" => Time.now.to_i
