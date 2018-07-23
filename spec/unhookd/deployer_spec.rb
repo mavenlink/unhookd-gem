@@ -13,6 +13,12 @@ RSpec.describe Unhookd::Deployer do
         "chart" => Unhookd.configuration.chart_name,
       }
     end
+
+    let(:expected_unhookd_query) { {
+      "release" => branch,
+      "chart" => Unhookd.configuration.chart_name,
+    }}
+
     let(:expected_unhookd_url) { Unhookd.configuration.unhookd_url}
     let(:expected_unhookd_body) { { "values" => chart_values }.merge(default_values).to_json }
     let(:expected_unhookd_headers) { { "Content-Type" => "application/json" } }
@@ -22,7 +28,7 @@ RSpec.describe Unhookd::Deployer do
     it "sends a request to the configured endpoint with the correct values" do
       expect(HTTParty)
         .to receive(:post)
-        .with(expected_unhookd_url, body: expected_unhookd_body, headers: expected_unhookd_headers, verify: false)
+        .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
 
       subject.deploy!
     end

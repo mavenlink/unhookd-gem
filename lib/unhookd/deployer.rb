@@ -13,6 +13,7 @@ module Unhookd
       HTTParty.post(
         @config.unhookd_url,
         body: get_values.to_json,
+        query: unhookd_query_params,
         headers: { "Content-Type" => "application/json" },
         verify: false,
       )
@@ -32,6 +33,13 @@ module Unhookd
           "chart" => @config.chart_name,
         }
       )
+    end
+
+    def unhookd_query_params
+      {
+        "release" => @branch,
+        "chart" => Unhookd.configuration.chart_name,
+      }
     end
 
     def post_deploy_message
