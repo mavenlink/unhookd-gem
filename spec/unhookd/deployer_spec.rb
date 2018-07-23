@@ -5,14 +5,6 @@ RSpec.describe Unhookd::Deployer do
     let(:sha) { "123" }
     let(:branch) { "my-branch" }
     let(:chart_values) { { "foo" => 'bar' } }
-    let(:default_values) do
-      {
-        "branch" => branch,
-        "release" => branch,
-        "repo" => Unhookd.configuration.repo_name,
-        "chart" => Unhookd.configuration.chart_name,
-      }
-    end
 
     let(:expected_unhookd_query) { {
       "release" => branch,
@@ -20,7 +12,7 @@ RSpec.describe Unhookd::Deployer do
     }}
 
     let(:expected_unhookd_url) { Unhookd.configuration.unhookd_url}
-    let(:expected_unhookd_body) { { "values" => chart_values }.merge(default_values).to_json }
+    let(:expected_unhookd_body) { { "values" => chart_values }.to_json }
     let(:expected_unhookd_headers) { { "Content-Type" => "application/json" } }
 
     subject { described_class.new(sha, branch, chart_values) }

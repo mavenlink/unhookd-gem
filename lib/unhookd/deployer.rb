@@ -12,7 +12,7 @@ module Unhookd
     def deploy!
       HTTParty.post(
         @config.unhookd_url,
-        body: get_values.to_json,
+        body: @final_values.to_json,
         query: unhookd_query_params,
         headers: { "Content-Type" => "application/json" },
         verify: false,
@@ -23,17 +23,6 @@ module Unhookd
     end
 
     private
-
-    def get_values
-      @final_values.merge!(
-        {
-          "branch" => @branch,
-          "release" => @branch,
-          "repo" => @config.repo_name,
-          "chart" => @config.chart_name,
-        }
-      )
-    end
 
     def unhookd_query_params
       {
