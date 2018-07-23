@@ -14,12 +14,6 @@ RSpec.describe Unhookd::Configuration do
       end
     end
 
-    describe "#repo_name" do
-      it "has a default value of 'repo_name'" do
-        expect(Unhookd::Configuration.new.repo_name).to eq("repo_name")
-      end
-    end
-
     describe "#slack_webhook_url" do
       it "has a default value of nil" do
         expect(Unhookd::Configuration.new.slack_webhook_url).to eq(nil)
@@ -53,14 +47,6 @@ RSpec.describe Unhookd::Configuration do
         config = Unhookd::Configuration.new
         config.chart_name = "somechart/name"
         expect(config.chart_name).to eq("somechart/name")
-      end
-    end
-
-    describe "#repo_name=" do
-      it "can set a value" do
-        config = Unhookd::Configuration.new
-        config.repo_name = "some_repo"
-        expect(config.repo_name).to eq("some_repo")
       end
     end
 
