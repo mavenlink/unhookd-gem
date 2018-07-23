@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Unhookd
   class BaseValues
     def self.fetch
