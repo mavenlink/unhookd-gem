@@ -12,7 +12,7 @@ RSpec.describe Unhookd::Deployer do
     }}
 
     let(:expected_unhookd_url) { Unhookd.configuration.unhookd_url}
-    let(:expected_unhookd_body) { { "values" => chart_values }.to_json }
+    let(:expected_unhookd_body) { chart_values.to_json }
     let(:expected_unhookd_headers) { { "Content-Type" => "application/json" } }
 
     subject { described_class.new(sha, branch, chart_values) }
