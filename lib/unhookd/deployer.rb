@@ -2,8 +2,8 @@ require 'httparty'
 
 module Unhookd
   class Deployer
-    def initialize(branch, chart_values)
-      @branch = branch
+    def initialize(release_name, chart_values)
+      @release_name = release_name
       @final_values = Unhookd::BaseValues.fetch.merge(chart_values)
       @config = Unhookd.configuration
     end
@@ -25,7 +25,7 @@ module Unhookd
 
     def unhookd_query_params
       {
-        "release" => @branch,
+        "release" => @release_name,
         "chart" => Unhookd.configuration.chart_name,
       }
     end

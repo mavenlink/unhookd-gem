@@ -2,13 +2,13 @@ require 'spec_helper'
 
 RSpec.describe Unhookd::Deployer do
   describe "#deploy" do
-    let(:branch) { "my-branch" }
+    let(:release_name) { "my-release_name" }
     let(:values_file_path) { "spec/fixtures/sample-values.yaml" }
     let(:file_values) { YAML.load_file(values_file_path) }
     let(:chart_values) { { "foo" => 'bar' } }
 
     let(:expected_unhookd_query) { {
-      "release" => branch,
+      "release" => release_name,
       "chart" => Unhookd.configuration.chart_name,
     }}
 
@@ -16,7 +16,7 @@ RSpec.describe Unhookd::Deployer do
     let(:expected_unhookd_body) { file_values.merge(chart_values).to_json }
     let(:expected_unhookd_headers) { { "Content-Type" => "application/json" } }
 
-    subject { described_class.new(branch, chart_values) }
+    subject { described_class.new(release_name, chart_values) }
 
     before do
       Unhookd.configure do |config|

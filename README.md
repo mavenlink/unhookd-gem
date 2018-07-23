@@ -32,7 +32,10 @@ Unhookd.configure do |config|
 end
 
 # Call deploy with the correct args!
-Unhookd.deploy!("your-branch", { "some_value" => "you'd like to set on your chart" })
+Unhookd.deploy!("release-name", { "some_value" => "you'd like to set on your chart" })
+
+# Release name serves as both the namespace the app will be deployed in and the name of the Helm Release
+# The Chart Values hash are the values you would like to override in your values file e.g. the sha being deployed
 ```
 
 Even better, pair this with a job in Circle Ci to enable continuous deploys to your Kubernetes cluster!
