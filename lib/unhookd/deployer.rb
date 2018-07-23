@@ -2,9 +2,8 @@ require 'httparty'
 
 module Unhookd
   class Deployer
-    def initialize(sha, branch, chart_values)
+    def initialize(branch, chart_values)
       @branch = branch
-      @sha = sha
       @final_values = Unhookd::BaseValues.fetch.merge(chart_values)
       @config = Unhookd.configuration
     end
