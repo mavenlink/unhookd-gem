@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     unhookd (0.1.0)
-      httparty (~> 0.16.2)
+      httparty (>= 0.10.0)
 
 GEM
   remote: https://rubygems.org/
@@ -36,4 +36,4 @@ DEPENDENCIES
   unhookd!
 
 BUNDLED WITH
-   1.16.2
+   1.16.3
