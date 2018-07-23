@@ -1,6 +1,7 @@
 require "unhookd/version"
 require "unhookd/configuration"
 require "unhookd/deployer"
+require "unhookd/notifiers/slack"
 
 module Unhookd
   class << self

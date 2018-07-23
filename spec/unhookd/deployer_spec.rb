@@ -29,23 +29,6 @@ RSpec.describe Unhookd::Deployer do
 
     context "when a slack_webhook_url has been configured" do
       let(:slack_webhook_url) { "http://my-slack-webhook-url.com" }
-      let(:expected_slack_url) { Unhookd.configuration.slack_webhook_url }
-      let(:expected_slack_body) do
-        {
-          "attachments" => [
-            {
-              "fallback" => "Your branch was deployed!",
-              "color" => "#36a64f",
-              "pretext" => "The '#{branch}' branch was deployed!",
-              "author_name" => "Unhookd",
-              "text" => Unhookd.configuration.slack_webhook_message,
-              "ts" => Time.now.to_i
-            }
-          ]
-        }.to_json
-      end
-
-      let(:expected_slack_headers) { { "Content-Type" => "application/json" } }
 
       before do
         Unhookd.configure do |config|
@@ -57,30 +40,24 @@ RSpec.describe Unhookd::Deployer do
         Unhookd.reset
       end
 
-      it "also sends a request to notify slack of a successful deployment" do
-        expect(HTTParty)
-          .to receive(:post)
-          .with(expected_unhookd_url, body: expected_unhookd_body, headers: expected_unhookd_headers, verify: false)
+      it "tells the Slack Notifier to send a notification" do
+        allow(Unhookd::Notifiers::Slack).to receive(:notify!).with(branch)
 
         expect(HTTParty)
           .to receive(:post)
-          .with(expected_slack_url, body: expected_slack_body, headers: expected_slack_headers, verify: false)
+          .with(expected_unhookd_url, body: expected_unhookd_body, headers: expected_unhookd_headers, verify: false)
 
         subject.deploy!
       end
     end
 
     context "when a slack_webhook_url has not been configured" do
-      let(:expected_slack_url) { Unhookd.configuration.slack_webhook_url }
+      it "does not tell the Slack Notifier to send a notification" do
+        expect(Unhookd::Notifiers::Slack).to_not receive(:notify!)
 
-      it "does not send a notification to slack" do
         expect(HTTParty)
           .to receive(:post)
           .with(expected_unhookd_url, body: expected_unhookd_body, headers: expected_unhookd_headers, verify: false)
-
-        expect(HTTParty)
-          .to_not receive(:post)
-          .with(expected_slack_url, any_args)
 
         subject.deploy!
       end
