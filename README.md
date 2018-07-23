@@ -28,7 +28,6 @@ require 'unhookd'
 Unhookd.configure do |config|
   config.unhookd_url = "your-url-to-your-unhookd-installation"
   config.chart_name = "your-chart-repo/your-chart-name"
-  config.repo_name = "your-git-repository"
   config.values_file_path = "path/to/file.yaml"
 end
 
