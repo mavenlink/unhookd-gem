@@ -27,39 +27,37 @@ RSpec.describe Unhookd::Deployer do
       subject.deploy!
     end
 
-    context "when a slack_webhook_url has been configured" do
-      let(:slack_webhook_url) { "http://my-slack-webhook-url.com" }
-
+    describe "notifying slack" do
       before do
-        Unhookd.configure do |config|
-          config.slack_webhook_url = slack_webhook_url
+        allow(HTTParty).to receive(:post)
+      end
+
+      context "when a slack_webhook_url has been configured" do
+        let(:slack_webhook_url) { "http://my-slack-webhook-url.com" }
+
+        before do
+          Unhookd.configure do |config|
+            config.slack_webhook_url = slack_webhook_url
+          end
+        end
+
+        after do
+          Unhookd.reset
+        end
+
+        it "tells the Slack Notifier to send a notification" do
+          allow(Unhookd::Notifiers::Slack).to receive(:notify!).with(branch)
+
+          subject.deploy!
         end
       end
 
-      after do
-        Unhookd.reset
-      end
+      context "when a slack_webhook_url has not been configured" do
+        it "does not tell the Slack Notifier to send a notification" do
+          expect(Unhookd::Notifiers::Slack).to_not receive(:notify!)
 
-      it "tells the Slack Notifier to send a notification" do
-        allow(Unhookd::Notifiers::Slack).to receive(:notify!).with(branch)
-
-        expect(HTTParty)
-          .to receive(:post)
-          .with(expected_unhookd_url, body: expected_unhookd_body, headers: expected_unhookd_headers, verify: false)
-
-        subject.deploy!
-      end
-    end
-
-    context "when a slack_webhook_url has not been configured" do
-      it "does not tell the Slack Notifier to send a notification" do
-        expect(Unhookd::Notifiers::Slack).to_not receive(:notify!)
-
-        expect(HTTParty)
-          .to receive(:post)
-          .with(expected_unhookd_url, body: expected_unhookd_body, headers: expected_unhookd_headers, verify: false)
-
-        subject.deploy!
+          subject.deploy!
+        end
       end
     end
   end
