@@ -28,10 +28,6 @@ RSpec.describe Unhookd::Notifiers::Slack do
       end
     end
 
-    after do
-      Unhookd.reset
-    end
-
     it "sends a request to slack with the correct params" do
       expect(HTTParty)
         .to receive(:post)

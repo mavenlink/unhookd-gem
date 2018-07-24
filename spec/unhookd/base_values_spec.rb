@@ -12,10 +12,6 @@ RSpec.describe Unhookd::BaseValues do
         end
       end
 
-      after do
-        Unhookd.reset
-      end
-
       it "returns that file loaded as a hash" do
         expect(described_class.fetch).to eq(expected_values_file_hash)
       end

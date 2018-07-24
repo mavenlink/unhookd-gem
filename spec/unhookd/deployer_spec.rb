@@ -24,10 +24,6 @@ RSpec.describe Unhookd::Deployer do
       end
     end
 
-    after do
-      Unhookd.reset
-    end
-
     it "sends a request to the configured endpoint with the correct values" do
       expect(HTTParty)
         .to receive(:post)
@@ -48,10 +44,6 @@ RSpec.describe Unhookd::Deployer do
           Unhookd.configure do |config|
             config.slack_webhook_url = slack_webhook_url
           end
-        end
-
-        after do
-          Unhookd.reset
         end
 
         it "tells the Slack Notifier to send a notification" do
@@ -82,10 +74,6 @@ RSpec.describe Unhookd::Deployer do
           Unhookd.configure do |config|
             config.async = true
           end
-        end
-
-        after do
-          Unhookd.reset
         end
 
         it "sends the async query parameter" do

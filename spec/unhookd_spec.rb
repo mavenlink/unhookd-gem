@@ -17,10 +17,6 @@ RSpec.describe Unhookd do
 
       expect(config.unhookd_url).to eq('www.some-url-in-a-cluster.com')
     end
-
-    after :each do
-      Unhookd.reset
-    end
   end
 
   describe ".reset" do
