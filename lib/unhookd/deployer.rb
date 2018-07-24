@@ -27,7 +27,8 @@ module Unhookd
       {
         "release" => @release_name,
         "chart" => Unhookd.configuration.chart_name,
-      }
+        "async" => Unhookd.configuration.async
+      }.delete_if { |_key, value| value.nil? }
     end
 
     def post_deploy_message

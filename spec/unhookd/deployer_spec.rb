@@ -69,5 +69,48 @@ RSpec.describe Unhookd::Deployer do
         end
       end
     end
+
+    describe "async" do
+      context "when async is set" do
+        let(:expected_unhookd_query) { {
+          "release" => release_name,
+          "chart" => Unhookd.configuration.chart_name,
+          "async" => Unhookd.configuration.async
+        }}
+
+        before do
+          Unhookd.configure do |config|
+            config.async = true
+          end
+        end
+
+        after do
+          Unhookd.reset
+        end
+
+        it "sends the async query parameter" do
+          expect(HTTParty)
+            .to receive(:post)
+              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+
+          subject.deploy!
+        end
+      end
+
+      context "when async is not set" do
+        before do
+          expect(Unhookd.configuration.async).to be_falsey
+          expect(expected_unhookd_query.keys).not_to include(:async)
+        end
+
+        it "does not send the async query parameter" do
+          expect(HTTParty)
+            .to receive(:post)
+              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+
+          subject.deploy!
+        end
+      end
+    end
   end
 end
