@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 Unhookd can be configured and used in a Ruby Script for one off deploys. Here is an example:
 
-```
+```ruby
 #!/usr/bin/env ruby
 
 require "unhookd"
@@ -50,6 +50,24 @@ Even better, pair this with a job in Circle Ci to enable continuous deploys to y
 | namespace             | no       | A namespace to be installed in. If not specified, the value of the release name will be used.                             |
 | slack_webhook_url     | no       | A Slack Webhook URl to send a post-deploy notification to                                                                 |
 | slack_webhook_message | no       | A Slack Webhook Message to send with the post-deploy notification. Valid keys are: :header, :title, :title_link, :message |
+
+## Configuring Slack Notifications
+
+Unhookd can optionally notify a slack channel when a deploy has been triggered. Here is an example of a slack notification configuration:
+
+```ruby
+Unhookd.configure do |config|
+  config.slack_webhook_url = 'some-url'
+  config.slack_webhook_message = {
+    header: "The `staging` branch of `my-rails-app` was deployed to `my-kubernetes-cluster`",
+    title: "This field will be linked to whatever the title_link is",
+    title_link: "https://some-url.com",
+    text: "A larger text field for adding more information about your deploy.",
+  }
+end
+```
+
+To get a webhook url for Slack, you can visit the [Custom Integrations](https://mavenlink.slack.com/apps/manage/custom-integrations) page. From there select "Incoming Webhooks" and click the `Add Configuration` button. There you can choose a channel and receive a webhook url.
 
 ## Development
 
