@@ -69,6 +69,8 @@ end
 
 To get a webhook url for Slack, you can visit the [Custom Integrations](https://mavenlink.slack.com/apps/manage/custom-integrations) page. From there select "Incoming Webhooks" and click the `Add Configuration` button. There you can choose a channel and receive a webhook url.
 
+From there you can also customize the `name` and `icon` of your webhook.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
