@@ -22,7 +22,12 @@ RSpec.describe Unhookd::Configuration do
 
     describe "#slack_webhook_message" do
       it "has a default value of nil" do
-        expect(Unhookd::Configuration.new.slack_webhook_message).to eq(nil)
+        expect(Unhookd::Configuration.new.slack_webhook_message).to eq({
+          header: "Something was deployed!",
+          title: nil,
+          title_link: nil,
+          message: nil,
+        })
       end
     end
 
@@ -73,8 +78,8 @@ RSpec.describe Unhookd::Configuration do
     describe "#slack_webhook_message=" do
       it "can set a value" do
         config = Unhookd::Configuration.new
-        config.slack_webhook_message = "I deployed your branch!"
-        expect(config.slack_webhook_message).to eq("I deployed your branch!")
+        config.slack_webhook_message = { header: "hey", title: nil, title_link: "foo", text: "bar"}
+        expect(config.slack_webhook_message).to eq({ header: "hey", title: nil, title_link: "foo", text: "bar"})
       end
     end
 

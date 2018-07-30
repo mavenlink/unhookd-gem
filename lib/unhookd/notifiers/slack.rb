@@ -9,9 +9,9 @@ module Unhookd
             {
               "fallback" => "Your branch was deployed!",
               "color" => "#36a64f",
-              "pretext" => "Something was deployed!",
+              "pretext" => @config.slack_webhook_message[:header],
               "author_name" => "Unhookd",
-              "text" => @config.slack_webhook_message,
+              "text" => @config.slack_webhook_message[:text],
               "ts" => Time.now.to_i
             }
           ]

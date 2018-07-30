@@ -11,9 +11,9 @@ RSpec.describe Unhookd::Notifiers::Slack do
           {
             "fallback" => "Your branch was deployed!",
             "color" => "#36a64f",
-            "pretext" => "Something was deployed!",
+            "pretext" => Unhookd.configuration.slack_webhook_message[:header],
             "author_name" => "Unhookd",
-            "text" => Unhookd.configuration.slack_webhook_message,
+            "text" => Unhookd.configuration.slack_webhook_message[:text],
             "ts" => Time.now.to_i
           }
         ]
