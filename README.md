@@ -19,36 +19,37 @@ Or install it yourself as:
     $ gem install unhookd
 
 ## Usage
-Unhookd can be configured and used in a Ruby Script for one off deploys.
+Unhookd can be configured and used in a Ruby Script for one off deploys. Here is an example:
 
 ```
-require 'unhookd'
+#!/usr/bin/env ruby
 
-# Configure unhookd
+require "unhookd"
+
+sha = ARGV[1]
+compare_url = ARGV[2]
+
 Unhookd.configure do |config|
-  config.unhookd_url = "your-url-to-your-unhookd-installation"
-  config.chart_name = "your-chart-repo/your-chart-name"
-  config.values_file_path = "path/to/file.yaml"
+  config.unhookd_url = "your-unhookd-url"
+  config.chart_name = "your-repo/your-chart"
 end
 
-# Call deploy with the correct args!
-Unhookd.deploy!("release-name", { "some_value" => "you'd like to set on your chart" })
-
-# Release name serves as both the namespace the app will be deployed in and the name of the Helm Release
-# The Chart Values hash are the values you would like to override in your values file e.g. the sha being deployed
+Unhookd.deploy!("release-name", { "your" => { "values" => "to-override}" } })
 ```
+
+By default, release-name serves as both the namespace the app will be deployed in and the name of the Helm release 
 
 Even better, pair this with a job in Circle Ci to enable continuous deploys to your Kubernetes cluster!
 
-## Slack Notification
-Unhookd also optionally supports notifying a Slack channel using the incoming webhooks feature of Slack. Configure your webhook url and set it and an optional message:
-
-```
-Unhookd.configure do |config|
-  config.slack_webhook_url = "your-slack-webhook-url"
-  config.slack_webhook_message = "Deployed with Unhookd!"
-end
-```
+## Configuration
+| Name                  | Required | Description                                                                                                               |
+|-----------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
+| unhookd_url           | yes      | Url that Unhookd exposes in your cluster                                                                                  |
+| chart_name            | yes      | The charts repository and name for Unhookd to deploy e.g. repo/chart                                                      |
+| values_file_path      | no       | Path to a base values file where default values can be specified.                                                         |
+| namespace             | no       | A namespace to be installed in. If not specified, the value of the release name will be used.                             |
+| slack_webhook_url     | no       | A Slack Webhook URl to send a post-deploy notification to                                                                 |
+| slack_webhook_message | no       | A Slack Webhook Message to send with the post-deploy notification. Valid keys are: :header, :title, :title_link, :message |
 
 ## Development
 
