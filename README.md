@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/mavenlink/unhookd-gem.svg?style=svg)](https://circleci.com/gh/mavenlink/unhookd-gem)
 
-This gem allows you to send a request to the Unhookd service in a Kubernetes cluster to deploy a rails application with a given sha and chart
+This gem allows you to send a request to the Unhookd service in a Kubernetes cluster to deploy a containerized application using Helm
 
 ## Installation
 
@@ -69,7 +69,7 @@ Unhookd.configure do |config|
 end
 ```
 
-To get a webhook url for Slack, you can visit the [Custom Integrations](https://mavenlink.slack.com/apps/manage/custom-integrations) page. From there select "Incoming Webhooks" and click the `Add Configuration` button. There you can choose a channel and receive a webhook url.
+To get a webhook url for Slack, you can visit the [Custom Integrations](https://mavenlink.slack.com/apps/manage/custom-integrations) page. From there select `Incoming Webhooks` and click the `Add Configuration` button. There you can choose a channel and receive a webhook url.
 
 From there you can also customize the `name` and `icon` of your webhook.
 
@@ -81,7 +81,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/unhookd. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mavenlink/unhookd-gem. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -89,4 +89,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Unhookd project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/unhookd/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Unhookd project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/mavenlink/unhookd-gem/blob/master/CODE_OF_CONDUCT.md).
