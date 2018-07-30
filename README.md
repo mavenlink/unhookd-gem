@@ -24,12 +24,7 @@ Or install it yourself as:
 Unhookd can be configured and used in a Ruby Script for one off deploys. Here is an example:
 
 ```ruby
-#!/usr/bin/env ruby
-
 require "unhookd"
-
-sha = ARGV[1]
-compare_url = ARGV[2]
 
 Unhookd.configure do |config|
   config.unhookd_url = "your-unhookd-url"
