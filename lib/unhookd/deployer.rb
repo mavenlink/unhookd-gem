@@ -2,60 +2,34 @@ require 'httparty'
 
 module Unhookd
   class Deployer
-    def initialize(sha, branch, chart_values)
-      @branch = branch
-      @sha = sha
-      @final_values = { "values" => chart_values }
+    def initialize(release_name, chart_values)
+      @release_name = release_name
+      @final_values = Unhookd::BaseValues.fetch.merge(chart_values)
       @config = Unhookd.configuration
     end
 
     def deploy!
       HTTParty.post(
         @config.unhookd_url,
-        body: get_values.to_json,
+        body: @final_values.to_json,
+        query: unhookd_query_params,
         headers: { "Content-Type" => "application/json" },
         verify: false,
       )
 
-      notify_slack unless @config.slack_webhook_url.nil?
+      Unhookd::Notifiers::Slack.notify! unless @config.slack_webhook_url.nil?
       post_deploy_message
     end
 
     private
 
-    def get_values
-      @final_values.merge!(
-        {
-          "branch" => @branch,
-          "release" => @branch,
-          "repo" => @config.repo_name,
-          "chart" => @config.chart_name,
-        }
-      )
-    end
-
-    def notify_slack
-      HTTParty.post(
-        @config.slack_webhook_url,
-        body: slack_webhook_body,
-        headers: { "Content-Type" => "application/json" },
-        verify: false,
-      )
-    end
-
-    def slack_webhook_body
+    def unhookd_query_params
       {
-        "attachments" => [
-          {
-            "fallback" => "Your branch was deployed!",
-            "color" => "#36a64f",
-            "pretext" => "The '#{@branch}' branch was deployed!",
-            "author_name" => "Unhookd",
-            "text" => @config.slack_webhook_message,
-            "ts" => Time.now.to_i
-          }
-        ]
-      }.to_json
+        "release" => @release_name,
+        "chart" => Unhookd.configuration.chart_name,
+        "async" => Unhookd.configuration.async,
+        "namespace" => Unhookd.configuration.namespace,
+      }.delete_if { |_key, value| value.nil? }
     end
 
     def post_deploy_message

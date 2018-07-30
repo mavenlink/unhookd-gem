@@ -14,12 +14,6 @@ RSpec.describe Unhookd::Configuration do
       end
     end
 
-    describe "#repo_name" do
-      it "has a default value of 'repo_name'" do
-        expect(Unhookd::Configuration.new.repo_name).to eq("repo_name")
-      end
-    end
-
     describe "#slack_webhook_url" do
       it "has a default value of nil" do
         expect(Unhookd::Configuration.new.slack_webhook_url).to eq(nil)
@@ -28,7 +22,30 @@ RSpec.describe Unhookd::Configuration do
 
     describe "#slack_webhook_message" do
       it "has a default value of nil" do
-        expect(Unhookd::Configuration.new.slack_webhook_message).to eq(nil)
+        expect(Unhookd::Configuration.new.slack_webhook_message).to eq({
+          header: "Something was deployed!",
+          title: nil,
+          title_link: nil,
+          message: nil,
+        })
+      end
+    end
+
+    describe "#values_file_path" do
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.values_file_path).to eq(nil)
+      end
+    end
+
+    describe "#async" do
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.async).to eq(nil)
+      end
+    end
+
+    describe "#namespace" do
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.namespace).to eq(nil)
       end
     end
   end
@@ -50,14 +67,6 @@ RSpec.describe Unhookd::Configuration do
       end
     end
 
-    describe "#repo_name=" do
-      it "can set a value" do
-        config = Unhookd::Configuration.new
-        config.repo_name = "some_repo"
-        expect(config.repo_name).to eq("some_repo")
-      end
-    end
-
     describe "#slack_webhook_url=" do
       it "can set a value" do
         config = Unhookd::Configuration.new
@@ -69,8 +78,32 @@ RSpec.describe Unhookd::Configuration do
     describe "#slack_webhook_message=" do
       it "can set a value" do
         config = Unhookd::Configuration.new
-        config.slack_webhook_message = "I deployed your branch!"
-        expect(config.slack_webhook_message).to eq("I deployed your branch!")
+        config.slack_webhook_message = { header: "hey", title: nil, title_link: "foo", text: "bar"}
+        expect(config.slack_webhook_message).to eq({ header: "hey", title: nil, title_link: "foo", text: "bar"})
+      end
+    end
+
+    describe "#values_file_path=" do
+      it "can set a value" do
+        config = Unhookd::Configuration.new
+        config.values_file_path = "foo/bar/path.yaml"
+        expect(config.values_file_path).to eq("foo/bar/path.yaml")
+      end
+    end
+
+    describe "#async=" do
+      it "can set a value" do
+        config = Unhookd::Configuration.new
+        config.async = true
+        expect(config.async).to eq(true)
+      end
+    end
+
+    describe "#namespace=" do
+      it "can set a value" do
+        config = Unhookd::Configuration.new
+        config.namespace = 'foo'
+        expect(config.namespace).to eq('foo')
       end
     end
   end
