@@ -11,6 +11,8 @@ module Unhookd
               "color" => "#36a64f",
               "pretext" => @config.slack_webhook_message[:header],
               "author_name" => "Unhookd",
+              "title" => @config.slack_webhook_message[:title],
+              "title_link" => @config.slack_webhook_message[:title_link],
               "text" => @config.slack_webhook_message[:text],
               "ts" => Time.now.to_i
             }

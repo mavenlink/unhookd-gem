@@ -13,6 +13,8 @@ RSpec.describe Unhookd::Notifiers::Slack do
             "color" => "#36a64f",
             "pretext" => Unhookd.configuration.slack_webhook_message[:header],
             "author_name" => "Unhookd",
+            "title" => Unhookd.configuration.slack_webhook_message[:title],
+            "title_link" => Unhookd.configuration.slack_webhook_message[:title_link],
             "text" => Unhookd.configuration.slack_webhook_message[:text],
             "ts" => Time.now.to_i
           }
@@ -25,6 +27,12 @@ RSpec.describe Unhookd::Notifiers::Slack do
     before do
       Unhookd.configure do |config|
         config.slack_webhook_url = slack_webhook_url
+        config.slack_webhook_message = {
+          header: "Hi there!",
+          title: "this is a link",
+          title_link: "https://google.com",
+          text: "Something else!",
+        }
       end
     end
 
