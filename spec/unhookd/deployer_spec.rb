@@ -62,7 +62,7 @@ RSpec.describe Unhookd::Deployer do
       end
     end
 
-    describe "async" do
+    describe "namespace" do
       context "when async is set" do
         let(:expected_unhookd_query) { {
           "release" => release_name,
@@ -92,6 +92,45 @@ RSpec.describe Unhookd::Deployer do
         end
 
         it "does not send the async query parameter" do
+          expect(HTTParty)
+            .to receive(:post)
+              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+
+          subject.deploy!
+        end
+      end
+    end
+
+    describe "namespace" do
+      context "when namespace is set" do
+        let(:expected_unhookd_query) { {
+          "release" => release_name,
+          "chart" => Unhookd.configuration.chart_name,
+          "namespace" => Unhookd.configuration.namespace
+        }}
+
+        before do
+          Unhookd.configure do |config|
+            config.namespace = 'foo'
+          end
+        end
+
+        it "sends the namespace query parameter" do
+          expect(HTTParty)
+            .to receive(:post)
+              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+
+          subject.deploy!
+        end
+      end
+
+      context "when namespace is not set" do
+        before do
+          expect(Unhookd.configuration.namespace).to be_falsey
+          expect(expected_unhookd_query.keys).not_to include(:namespace)
+        end
+
+        it "does not send the namespace query parameter" do
           expect(HTTParty)
             .to receive(:post)
               .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
