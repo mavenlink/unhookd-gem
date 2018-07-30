@@ -3,14 +3,14 @@ require "spec_helper"
 RSpec.describe Unhookd::Configuration do
   context "default values" do
     describe "#unhookd_url" do
-      it "has a default value of 'http://localhost:8080'" do
-        expect(Unhookd::Configuration.new.unhookd_url).to eq("http://localhost:8080")
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.unhookd_url).to eq(nil)
       end
     end
 
     describe "#chart_name" do
-      it "has a default value of 'repo/chart'" do
-        expect(Unhookd::Configuration.new.chart_name).to eq("repo/chart")
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.chart_name).to eq(nil)
       end
     end
 
