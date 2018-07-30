@@ -33,4 +33,6 @@ module Unhookd
   def self.valid?
     !configuration.unhookd_url.nil? && !configuration.chart_name.nil?
   end
+
+  private_class_method :valid?
 end
