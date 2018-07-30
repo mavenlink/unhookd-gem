@@ -21,6 +21,8 @@ RSpec.describe Unhookd::Deployer do
     before do
       Unhookd.configure do |config|
         config.values_file_path = values_file_path
+        config.chart_name = "my/chart"
+        config.unhookd_url = "https://my-url.com"
       end
     end
 

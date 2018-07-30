@@ -3,6 +3,7 @@ require "unhookd/configuration"
 require "unhookd/deployer"
 require "unhookd/notifiers/slack"
 require "unhookd/base_values"
+require "unhookd/errors/invalid_configuration"
 
 module Unhookd
   class << self
@@ -22,6 +23,16 @@ module Unhookd
   end
 
   def self.deploy!(release_name, chart_values)
-    Unhookd::Deployer.new(release_name, chart_values).deploy!
+    if valid?
+      Deployer.new(release_name, chart_values).deploy!
+    else
+      raise InvalidConfiguration, "some required args were missing"
+    end
   end
+
+  def self.valid?
+    !configuration.unhookd_url.nil? && !configuration.chart_name.nil?
+  end
+
+  private_class_method :valid?
 end
