@@ -1,5 +1,7 @@
 # unhookd-gem
 
+[![CircleCI](https://circleci.com/gh/mavenlink/unhookd-gem.svg?style=svg)](https://circleci.com/gh/mavenlink/unhookd-gem)
+
 This gem allows you to send a request to the Unhookd service in a Kubernetes cluster to deploy a rails application with a given sha and chart
 
 ## Installation
