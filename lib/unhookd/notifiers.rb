@@ -2,6 +2,6 @@
 
 module Unhookd
   module Notifiers
-    autoload :Slack, "notifiers/slack"
+    autoload :Slack, "unhookd/notifiers/slack"
   end
 end

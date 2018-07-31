@@ -2,6 +2,6 @@
 
 module Unhookd
   module Errors
-    autoload :InvalidConfiguration, "errors/invalid_configuration"
+    autoload :InvalidConfiguration, "unhookd/errors/invalid_configuration"
   end
 end
