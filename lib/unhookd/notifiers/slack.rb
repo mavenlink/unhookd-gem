@@ -19,7 +19,7 @@ module Unhookd
           ]
         }.to_json
 
-        HTTParty.post(
+        HttpFactory.post(
           @config.slack_webhook_url,
           body: slack_webhook_body,
           headers: { "Content-Type" => "application/json" },

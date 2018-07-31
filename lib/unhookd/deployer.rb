@@ -9,7 +9,7 @@ module Unhookd
     end
 
     def deploy!
-      HTTParty.post(
+      HttpFactory.post(
         @config.unhookd_url,
         body: @final_values.to_json,
         query: unhookd_query_params,

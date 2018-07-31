@@ -1,5 +1,6 @@
 require "unhookd/version"
 require "unhookd/configuration"
+require "unhookd/http_factory"
 require "unhookd/deployer"
 require "unhookd/notifiers/slack"
 require "unhookd/base_values"

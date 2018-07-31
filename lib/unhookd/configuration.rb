@@ -1,6 +1,13 @@
 module Unhookd
   class Configuration
-    attr_accessor :unhookd_url, :chart_name, :slack_webhook_url, :slack_webhook_message, :values_file_path, :async, :namespace
+    attr_accessor :unhookd_url,
+                  :chart_name,
+                  :slack_webhook_url,
+                  :slack_webhook_message,
+                  :values_file_path,
+                  :async,
+                  :namespace,
+                  :logger
 
     def initialize
       @unhookd_url           = nil # (required) The url that Unhookd exposes in your cluster
@@ -15,6 +22,7 @@ module Unhookd
         title_link: nil,
         message: nil,
       }
+      @logger                = nil # (option) Logger object
     end
   end
 end
