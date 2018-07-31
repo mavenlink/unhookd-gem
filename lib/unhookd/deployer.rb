@@ -1,4 +1,4 @@
-require 'httparty'
+#
 
 module Unhookd
   class Deployer

@@ -1,5 +1,11 @@
-class HttpFactory
-  include HTTParty
+#
 
-  logger Unhookd.configuration.logger
+require 'httparty'
+
+module Unhookd
+  class HttpFactory
+    include HTTParty
+
+    logger ::Unhookd.configuration.logger
+  end
 end
