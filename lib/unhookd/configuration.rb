@@ -22,7 +22,7 @@ module Unhookd
         title_link: nil,
         message: nil,
       }
-      @logger                = nil # (option) Logger object
+      @logger                = nil # (optional) Logger object
     end
   end
 end

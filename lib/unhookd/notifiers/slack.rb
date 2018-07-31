@@ -22,8 +22,7 @@ module Unhookd
         HttpFactory.post(
           @config.slack_webhook_url,
           body: slack_webhook_body,
-          headers: { "Content-Type" => "application/json" },
-          verify: false,
+          headers: { "Content-Type" => "application/json" }
         )
       end
     end

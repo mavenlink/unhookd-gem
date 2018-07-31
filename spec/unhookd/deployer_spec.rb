@@ -29,7 +29,7 @@ RSpec.describe Unhookd::Deployer do
     it "sends a request to the configured endpoint with the correct values" do
       expect(Unhookd::HttpFactory)
         .to receive(:post)
-        .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+        .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers)
 
       subject.deploy!
     end
@@ -81,7 +81,7 @@ RSpec.describe Unhookd::Deployer do
         it "sends the async query parameter" do
           expect(Unhookd::HttpFactory)
             .to receive(:post)
-              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers)
 
           subject.deploy!
         end
@@ -96,7 +96,7 @@ RSpec.describe Unhookd::Deployer do
         it "does not send the async query parameter" do
           expect(Unhookd::HttpFactory)
             .to receive(:post)
-              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers)
 
           subject.deploy!
         end
@@ -120,7 +120,7 @@ RSpec.describe Unhookd::Deployer do
         it "sends the namespace query parameter" do
           expect(Unhookd::HttpFactory)
             .to receive(:post)
-              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers)
 
           subject.deploy!
         end
@@ -135,7 +135,7 @@ RSpec.describe Unhookd::Deployer do
         it "does not send the namespace query parameter" do
           expect(Unhookd::HttpFactory)
             .to receive(:post)
-              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
+              .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers)
 
           subject.deploy!
         end

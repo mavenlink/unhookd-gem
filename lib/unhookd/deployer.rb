@@ -33,8 +33,10 @@ module Unhookd
     end
 
     def post_deploy_message
-      @config.logger.info "Success! Sent a request to Unhookd with the following values:"
-      @config.logger.info @final_values.inspect
+      if @config.logger
+        @config.logger.info "Success! Sent a request to Unhookd with the following values:"
+        @config.logger.info @final_values.inspect
+      end
     end
   end
 end
