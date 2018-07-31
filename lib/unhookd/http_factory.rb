@@ -1,5 +1,5 @@
 class HttpFactory
   include HTTParty
 
-  logger ::Logger.new Unhookd.configuration.logger
+  logger Unhookd.configuration.logger
 end
