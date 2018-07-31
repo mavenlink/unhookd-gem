@@ -21,7 +21,7 @@ module Unhookd
     if valid?
       Deployer.new(release_name, chart_values).deploy!
     else
-      raise InvalidConfiguration, "some required args were missing"
+      raise Errors::InvalidConfiguration, "some required args were missing"
     end
   end
 

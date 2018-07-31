@@ -27,7 +27,7 @@ RSpec.describe Unhookd::Deployer do
     end
 
     it "sends a request to the configured endpoint with the correct values" do
-      expect(HTTParty)
+      expect(Unhookd::HttpFactory)
         .to receive(:post)
         .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
 
@@ -36,7 +36,7 @@ RSpec.describe Unhookd::Deployer do
 
     describe "notifying slack" do
       before do
-        allow(HTTParty).to receive(:post)
+        allow(Unhookd::HttpFactory).to receive(:post)
       end
 
       context "when a slack_webhook_url has been configured" do
@@ -79,7 +79,7 @@ RSpec.describe Unhookd::Deployer do
         end
 
         it "sends the async query parameter" do
-          expect(HTTParty)
+          expect(Unhookd::HttpFactory)
             .to receive(:post)
               .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
 
@@ -94,7 +94,7 @@ RSpec.describe Unhookd::Deployer do
         end
 
         it "does not send the async query parameter" do
-          expect(HTTParty)
+          expect(Unhookd::HttpFactory)
             .to receive(:post)
               .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
 
@@ -118,7 +118,7 @@ RSpec.describe Unhookd::Deployer do
         end
 
         it "sends the namespace query parameter" do
-          expect(HTTParty)
+          expect(Unhookd::HttpFactory)
             .to receive(:post)
               .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
 
@@ -133,7 +133,7 @@ RSpec.describe Unhookd::Deployer do
         end
 
         it "does not send the namespace query parameter" do
-          expect(HTTParty)
+          expect(Unhookd::HttpFactory)
             .to receive(:post)
               .with(expected_unhookd_url, body: expected_unhookd_body, query: expected_unhookd_query, headers: expected_unhookd_headers, verify: false)
 
