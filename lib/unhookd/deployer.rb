@@ -1,4 +1,4 @@
-require 'httparty'
+#
 
 module Unhookd
   class Deployer
@@ -9,16 +9,16 @@ module Unhookd
     end
 
     def deploy!
-      HTTParty.post(
-        @config.unhookd_url,
-        body: @final_values.to_json,
-        query: unhookd_query_params,
-        headers: { "Content-Type" => "application/json" },
-        verify: false,
-      )
+      response = HttpFactory.post(
+                   @config.unhookd_url,
+                   body: @final_values.to_json,
+                   query: unhookd_query_params,
+                   headers: { "Content-Type" => "application/json" }
+                 )
 
       Unhookd::Notifiers::Slack.notify! unless @config.slack_webhook_url.nil?
       post_deploy_message
+      response
     end
 
     private
@@ -33,8 +33,10 @@ module Unhookd
     end
 
     def post_deploy_message
-      puts "Success! Sent a request to Unhookd with the following values:"
-      puts @final_values.inspect
+      if @config.logger
+        @config.logger.info "Success! Sent a request to Unhookd with the following values:"
+        @config.logger.info @final_values.inspect
+      end
     end
   end
 end

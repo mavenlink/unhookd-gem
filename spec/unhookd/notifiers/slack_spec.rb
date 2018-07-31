@@ -37,9 +37,9 @@ RSpec.describe Unhookd::Notifiers::Slack do
     end
 
     it "sends a request to slack with the correct params" do
-      expect(HTTParty)
+      expect(Unhookd::HttpFactory)
         .to receive(:post)
-        .with(expected_slack_url, body: expected_slack_body, headers: expected_slack_headers, verify: false)
+        .with(expected_slack_url, body: expected_slack_body, headers: expected_slack_headers)
 
       described_class.notify!
     end

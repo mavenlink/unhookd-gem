@@ -48,6 +48,12 @@ RSpec.describe Unhookd::Configuration do
         expect(Unhookd::Configuration.new.namespace).to eq(nil)
       end
     end
+
+    describe "#logger" do
+      it "has a default value of nil" do
+        expect(Unhookd::Configuration.new.logger).to eq(nil)
+      end
+    end
   end
 
   describe "setters" do
@@ -104,6 +110,14 @@ RSpec.describe Unhookd::Configuration do
         config = Unhookd::Configuration.new
         config.namespace = 'foo'
         expect(config.namespace).to eq('foo')
+      end
+    end
+
+    describe "#logger=" do
+      it "can set a value" do
+        config = Unhookd::Configuration.new
+        config.logger = 'foo'
+        expect(config.logger).to eq('foo')
       end
     end
   end

@@ -1,5 +1,7 @@
 module Unhookd
-  class InvalidConfiguration < StandardError
+  module Errors
+    class InvalidConfiguration < StandardError
 
+    end
   end
 end

@@ -66,7 +66,7 @@ RSpec.describe Unhookd do
       it "raises the Unhookd missing args error" do
         expect {
           Unhookd.deploy!(release_name, chart_values)
-        }.to raise_error(Unhookd::InvalidConfiguration)
+        }.to raise_error(Unhookd::Errors::InvalidConfiguration)
 
       end
     end
