@@ -7,5 +7,7 @@ module Unhookd
     include HTTParty
 
     logger ::Unhookd.configuration.logger
+
+    read_timeout 120
   end
 end
