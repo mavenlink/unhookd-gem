@@ -8,6 +8,6 @@ module Unhookd
 
     logger ::Unhookd.configuration.logger
 
-    read_timeout 120
+    read_timeout ::Unhookd.configuration.read_timeout
   end
 end

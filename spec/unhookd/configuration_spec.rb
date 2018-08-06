@@ -54,6 +54,12 @@ RSpec.describe Unhookd::Configuration do
         expect(Unhookd::Configuration.new.logger).to eq(nil)
       end
     end
+
+    describe "#read_timeout" do
+      it "has a default value of 120" do
+        expect(Unhookd::Configuration.new.read_timeout).to eq(120)
+      end
+    end
   end
 
   describe "setters" do
@@ -118,6 +124,14 @@ RSpec.describe Unhookd::Configuration do
         config = Unhookd::Configuration.new
         config.logger = 'foo'
         expect(config.logger).to eq('foo')
+      end
+    end
+
+    describe "#read_timeout=" do
+      it "can set a value" do
+        config = Unhookd::Configuration.new
+        config.read_timeout = 'foo'
+        expect(config.read_timeout).to eq('foo')
       end
     end
   end

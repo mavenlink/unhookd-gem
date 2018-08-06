@@ -7,7 +7,8 @@ module Unhookd
                   :values_file_path,
                   :async,
                   :namespace,
-                  :logger
+                  :logger,
+                  :read_timeout
 
     def initialize
       @unhookd_url           = nil # (required) The url that Unhookd exposes in your cluster
@@ -23,6 +24,7 @@ module Unhookd
         message: nil,
       }
       @logger                = nil # (optional) Logger object
+      @read_timeout          = 120 # (optional) Time client will wait for response from server
     end
   end
 end
