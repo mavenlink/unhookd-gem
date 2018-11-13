@@ -13,7 +13,8 @@ module Unhookd
                    @config.unhookd_url,
                    body: @final_values.to_json,
                    query: unhookd_query_params,
-                   headers: { "Content-Type" => "application/json" }
+                   headers: { "Content-Type" => "application/json" },
+                   timeout: 600
                  )
 
       Unhookd::Notifiers::Slack.notify! unless @config.slack_webhook_url.nil?
