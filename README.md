@@ -47,6 +47,7 @@ Even better, pair this with a job in Circle Ci to enable continuous deploys to y
 | namespace             | no       | A namespace to be installed in. If not specified, the value of the release name will be used.                             |
 | slack_webhook_url     | no       | A Slack Webhook URl to send a post-deploy notification to                                                                 |
 | slack_webhook_message | no       | A Slack Webhook Message to send with the post-deploy notification. Valid keys are: :header, :title, :title_link, :message |
+| read_timeout          | no       | Time client will wait for response from server                                                                            |
 
 ## Configuring Slack Notifications
 
