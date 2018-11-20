@@ -24,7 +24,7 @@ module Unhookd
         message: nil,
       }
       @logger                = nil # (optional) Logger object
-      @read_timeout          = 120 # (optional) Time client will wait for response from server
+      @read_timeout          = 600 # (optional) Time client will wait for response from server
     end
   end
 end
