@@ -57,7 +57,7 @@ RSpec.describe Unhookd::Configuration do
 
     describe "#read_timeout" do
       it "has a default value of 120" do
-        expect(Unhookd::Configuration.new.read_timeout).to eq(600)
+        expect(Unhookd::Configuration.new.read_timeout).to eq(120)
       end
     end
   end
